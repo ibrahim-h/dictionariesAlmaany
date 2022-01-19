@@ -1,62 +1,67 @@
 # -*- coding: utf-8 -*-
-#Copyright (C) Ibrahim Hamadeh, released under GPLv2.0
-#See the file COPYING for more details.
-#This addon is aimed to get meaning of words using almaany.com website dictionaries.
-#press nvda+windows+d, a dialog will be displayed, and you will be standing on an edit box
-#write the word you want, tab and choose the dictionary, press enter and the meaning will be displayed in a separate browseable message box.
+# Copyright (C) 2020 Ibrahim Hamadeh, released under GPLv2.0
+# See the file COPYING for more details.
+# This addon is aimed to get meaning of words using almaany.com website dictionaries.
+# The default gesture of this addon is: nvda+windows+d.
 
 import gui, wx
-from gui import guiHelper
+import api
+import textInfos
 import config
 import globalPluginHandler
+from gui import guiHelper
+from scriptHandler import script
 from .myDialog import MyDialog
+from .myDialog import getListOfDictionaryNames, getUrlOfDictionary
 from logHandler import log
+
 import addonHandler
 addonHandler.initTranslation()
 
+#the function that specifies if a certain text is selected or not
+#and if it is, returns text selected
+def isSelectedText():
+	obj=api.getFocusObject()
+	treeInterceptor=obj.treeInterceptor
+	if hasattr(treeInterceptor,'TextInfo') and not treeInterceptor.passThrough:
+		obj=treeInterceptor
+	try:
+		info=obj.makeTextInfo(textInfos.POSITION_SELECTION)
+	#except (RuntimeError, NotImplementedError):
+	except:
+		info=None
+	if not info or info.isCollapsed:
+		return False
+	else:
+		return info.text
+
 #default configuration 
 configspec={
+	"defaultDictionary": "integer(default=0)",
 	"windowType": "integer(default=0)",
 	"closeDialogAfterRequiringTranslation": "boolean(default= False)"
 }
 config.conf.spec["dictionariesAlmaany"]= configspec
 
+# Ensure one instance is running.
 INSTANCE= None
 
 class GlobalPlugin(globalPluginHandler.GlobalPlugin):
+	# Translators: Category in input gestures dialog.
 	scriptCategory= _('Dictionaries Almaany')
 
 	def __init__(self, *args, **kwargs):
 		super(GlobalPlugin, self).__init__(*args, **kwargs)
 
-		if hasattr(gui, 'SettingsPanel'):
-			gui.settingsDialogs.NVDASettingsDialog.categoryClasses.append(DictionariesAlmaany)
-		else:
-			self.prefmenu= gui.mainFrame.sysTrayIcon.preferencesMenu
-			self.addonmenu= self.prefmenu.Append(wx.ID_ANY,
-			# Translators: label of Dictionaries Almaany setting menu in preferences menu
-			_("&Dictionaries Almaany..."),
-			"Opens setting dialog"
-			)
-			gui.mainFrame.sysTrayIcon.Bind(wx.EVT_MENU, self.onOpenSettingDialog, self.addonmenu)
-
-	def onOpenSettingDialog(self, evt):
-		gui.mainFrame._popupSettingsDialog(DictionariesAlmaany)
+		gui.settingsDialogs.NVDASettingsDialog.categoryClasses.append(DictionariesAlmaany)
 
 	def terminate(self):
-		if hasattr(gui, 'SettingsPanel'):
-			gui.settingsDialogs.NVDASettingsDialog.categoryClasses.remove(DictionariesAlmaany)
-		else:
-			try:
-				self.prefmenu.RemoveItem(self.addonmenu)
-			except :
-				pass
+		gui.settingsDialogs.NVDASettingsDialog.categoryClasses.remove(DictionariesAlmaany)
 
-	def script_showDialog(self, gesture):
+	def showDictionariesAlmaanyDialog(self):
 		global INSTANCE
 		if not INSTANCE:
 			d= MyDialog(gui.mainFrame)
-			#d= MyDialog(None)
 #			log.info('after creating object')
 			d.postInit()
 			d.Raise()
@@ -64,23 +69,47 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 			INSTANCE= d
 		else:
 			INSTANCE.Raise()
-	script_showDialog.__doc__= _('Opens DictionariesAlmaany dialog to get meaning of words.')
 
-	__gestures= {
-	'kb:nvda+windows+d': 'showDialog'
-	}
+	@script(
+		# Translators: Message displayed in input help mode.
+		description= _("Get the meaning of selected word by Almaany Dictionary, and if no selection, Opens Dictionaries Almaany dialog to enter a word and get it's meaning ."),
+		gesture= "kb:nvda+windows+d"
+	)
+	def script_dictionariesAlmaany(self, gesture):
+		text= isSelectedText()
+		if text and not text.isspace():
+			text= text.strip()
+			# We need to get the url of default dictionary.
+			#indexOfDefault= config.conf["dictionariesAlmaany"]["defaultDictionary"]
+			url= getUrlOfDictionary(default= True)
+			MyDialog.getMeaning(text, url)
+			return
+		# Open Dictionaries Almaany dialog
+		self.showDictionariesAlmaanyDialog()
 
-parentClass= gui.SettingsPanel if hasattr(gui, 'SettingsPanel') else gui.SettingsDialog
-#make either SettingsPanel or SettingsDialog class
-class DictionariesAlmaany(parentClass):
+#make  SettingsPanel  class
+class DictionariesAlmaany(gui.SettingsPanel):
 	# Translators: title of the dialog
 	title= _("Dictionaries Almaany")
 
 	def makeSettings(self, sizer):
 		settingsSizerHelper = guiHelper.BoxSizerHelper(self, sizer=sizer)
 
+		self.availableDictionariesComboBox= settingsSizerHelper.addLabeledControl(
+		# Translators: label of cumbo box to choose default dictionary.
+		_("Choose default dictionary:"), 
+		wx.Choice, choices= getListOfDictionaryNames()
+		)
+		self.availableDictionariesComboBox.SetSelection(config.conf["dictionariesAlmaany"]["defaultDictionary"])
+
+		windowTypes= [
 		# Translators: Type of windows to display translation result.
-		windowTypes= [_("Default full browser"), _("Browser window only"), _("NVDA browseable message box(choose it after testing)")]
+		_("Default full browser"), 
+		# Translators: Type of windows to display translation result.
+		_("Browser window only"), 
+		# Translators: Type of windows to display translation result.
+		_("NVDA browseable message box(choose it after testing)")
+		]
 		self.resultWindowComboBox= settingsSizerHelper.addLabeledControl(
 		# Translators: label of cumbo box to choose type of window to display result.
 		_("Choose type of window To Display Result:"), 
@@ -88,21 +117,11 @@ class DictionariesAlmaany(parentClass):
 		self.resultWindowComboBox.SetSelection(config.conf["dictionariesAlmaany"]["windowType"])
 
 		# Translators: label of the check box 
-		self.closeDialogCheckBox=wx.CheckBox(self,label=_("&Close Dictionaries Almaany Dialog after requiring translation"))
+		self.closeDialogCheckBox=wx.CheckBox(self,label=_("Close Almaany Translator Dialog after requesting translation"))
 		self.closeDialogCheckBox.SetValue(config.conf["dictionariesAlmaany"]["closeDialogAfterRequiringTranslation"])
 		settingsSizerHelper.addItem(self.closeDialogCheckBox)
 
-	if hasattr(parentClass, 'onSave'):
-		def onSave(self):
-			config.conf["dictionariesAlmaany"]["windowType"]= self.resultWindowComboBox.GetSelection()
-			config.conf["dictionariesAlmaany"]["closeDialogAfterRequiringTranslation"]= self.closeDialogCheckBox.IsChecked() 
-
-	else:
-		def onOk(self, evt):
-			config.conf["dictionariesAlmaany"]["windowType"]= self.resultWindowComboBox.GetSelection()
-			config.conf["dictionariesAlmaany"]["closeDialogAfterRequiringTranslation"]= self.closeDialogCheckBox.IsChecked() 
-			super(DictionariesAlmaany, self).onOk(evt)
-
-		def postInit(self):
-			self.resultWindowComboBox.SetFocus()
-
+	def onSave(self):
+		config.conf["dictionariesAlmaany"]["defaultDictionary"]= self.availableDictionariesComboBox.GetSelection()
+		config.conf["dictionariesAlmaany"]["windowType"]= self.resultWindowComboBox.GetSelection()
+		config.conf["dictionariesAlmaany"]["closeDialogAfterRequiringTranslation"]= self.closeDialogCheckBox.IsChecked() 
