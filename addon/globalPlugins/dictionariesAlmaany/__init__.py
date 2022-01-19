@@ -72,7 +72,7 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 
 	@script(
 		# Translators: Message displayed in input help mode.
-		description= _("Get the meaning of selected word by Almaany Dictionary, and if no selection, Opens Dictionaries Almaany dialog to enter a word and get it's meaning ."),
+		description= _("Get the meaning of selected word by Dictionaries Almaany, and if no selection, Opens Dictionaries Almaany dialog to enter a word and get it's meaning ."),
 		gesture= "kb:nvda+windows+d"
 	)
 	def script_dictionariesAlmaany(self, gesture):
@@ -117,7 +117,7 @@ class DictionariesAlmaany(gui.SettingsPanel):
 		self.resultWindowComboBox.SetSelection(config.conf["dictionariesAlmaany"]["windowType"])
 
 		# Translators: label of the check box 
-		self.closeDialogCheckBox=wx.CheckBox(self,label=_("Close Almaany Translator Dialog after requesting translation"))
+		self.closeDialogCheckBox=wx.CheckBox(self,label=_("Close Dictionaries almaany Dialog after requesting translation"))
 		self.closeDialogCheckBox.SetValue(config.conf["dictionariesAlmaany"]["closeDialogAfterRequiringTranslation"])
 		settingsSizerHelper.addItem(self.closeDialogCheckBox)
 

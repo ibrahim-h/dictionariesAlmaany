@@ -5,78 +5,103 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 'dictionariesAlmaany' '2.3'\n"
+"Project-Id-Version: 'dictionariesAlmaany' '2.4'\n"
 "Report-Msgid-Bugs-To: 'nvda-translations@freelists.org'\n"
-"POT-Creation-Date: 2021-03-07 20:00+0200\n"
-"PO-Revision-Date: 2021-03-08 17:39+0200\n"
-"Last-Translator: \n"
-"Language-Team: \n"
+"POT-Creation-Date: 2022-01-19 02:30+0200\n"
+"PO-Revision-Date: 2022-01-19 15:46+0200\n"
 "Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5);\n"
+"Last-Translator: \n"
+"Language-Team: \n"
 "X-Generator: Poedit 2.0.7\n"
-"Plural-Forms: nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && "
-"n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5);\n"
+"X-Poedit-SourceCharset: UTF-8\n"
 
+#. Translators: Category in input gestures dialog.
 #. Translators: title of the dialog
-#: addon\globalPlugins\DictionariesAlmaany\__init__.py:27
-#: addon\globalPlugins\DictionariesAlmaany\__init__.py:77
-#: addon\globalPlugins\DictionariesAlmaany\myDialog.py:38
+#. Translators: Title of dialog.
+#: addon\globalPlugins\DictionariesAlmaany\__init__.py:51
+#: addon\globalPlugins\DictionariesAlmaany\__init__.py:93
+#: addon\globalPlugins\DictionariesAlmaany\myDialog.py:39
+#: addon\globalPlugins\DictionariesAlmaany\myDialog.py:91
 msgid "Dictionaries Almaany"
 msgstr "قواميس المَعاني"
 
-#. Translators: label of Dictionaries Almaany setting menu in preferences menu
-#: addon\globalPlugins\DictionariesAlmaany\__init__.py:38
-msgid "&Dictionaries Almaany..."
-msgstr "قواميس المَعاني"
+#. Translators: Message displayed in input help mode.
+#: addon\globalPlugins\DictionariesAlmaany\__init__.py:75
+msgid ""
+"Get the meaning of selected word by Dictionaries Almaany, and if no "
+"selection, Opens Dictionaries Almaany dialog to enter a word and get it's "
+"meaning ."
+msgstr ""
+"الحصول على معنى الكلمة المُحددة بواسطةْ قواميس المَعاني,و إذا لم يكن هناك "
+"تحديد, يتم فتح محاورةْ قواميس المَعاني لإدخال كلمة و إيجاد معناها."
 
-#: addon\globalPlugins\DictionariesAlmaany\__init__.py:67
-msgid "Opens DictionariesAlmaany dialog to get meaning of words."
-msgstr "فتح محاورةْ قواميس المعاني, للحصول على معنى الكلمة"
+#. Translators: label of cumbo box to choose default dictionary.
+#: addon\globalPlugins\DictionariesAlmaany\__init__.py:100
+msgid "Choose default dictionary:"
+msgstr "اخترْ القاموس الإفتراضي:"
 
 #. Translators: Type of windows to display translation result.
-#: addon\globalPlugins\DictionariesAlmaany\__init__.py:83
+#: addon\globalPlugins\DictionariesAlmaany\__init__.py:107
 msgid "Default full browser"
 msgstr "المتصفح الإفتراضي العادي"
 
-#: addon\globalPlugins\DictionariesAlmaany\__init__.py:83
+#. Translators: Type of windows to display translation result.
+#: addon\globalPlugins\DictionariesAlmaany\__init__.py:109
 msgid "Browser window only"
 msgstr "نافذةْ المتصفح فقط"
 
-#: addon\globalPlugins\DictionariesAlmaany\__init__.py:83
+#. Translators: Type of windows to display translation result.
+#: addon\globalPlugins\DictionariesAlmaany\__init__.py:111
 msgid "NVDA browseable message box(choose it after testing)"
-msgstr "نافذةْ NVDA browseable message box(مِن الأفضل تجربتها قبل الإختيار)"
+msgstr "نافذةْ NVDA الخاصة بالتصفح(مِن الأفضل تجربتها قبل الإختيار)"
 
 #. Translators: label of cumbo box to choose type of window to display result.
-#: addon\globalPlugins\DictionariesAlmaany\__init__.py:86
+#: addon\globalPlugins\DictionariesAlmaany\__init__.py:115
 msgid "Choose type of window To Display Result:"
 msgstr "اختيار نافذةْ النتائج:"
 
 #. Translators: label of the check box
-#: addon\globalPlugins\DictionariesAlmaany\__init__.py:91
-msgid "&Close Dictionaries Almaany Dialog after requiring translation"
+#: addon\globalPlugins\DictionariesAlmaany\__init__.py:120
+msgid "Close Dictionaries almaany Dialog after requesting translation"
 msgstr "إغلاق محاورةْ قواميس المَعاني بعد طلب معنى الكلمة"
 
-#: addon\globalPlugins\DictionariesAlmaany\myDialog.py:74
+#: addon\globalPlugins\DictionariesAlmaany\myDialog.py:98
 msgid "Enter a word please"
-msgstr "أَدْخِل كلمة فضلا"
+msgstr "أَدْخِلْ كلمة فضلا"
 
-#: addon\globalPlugins\DictionariesAlmaany\myDialog.py:81
+#. Translators: Label of cumbo box to choose a dictionary.
+#: addon\globalPlugins\DictionariesAlmaany\myDialog.py:106
 msgid "Choose Dictionary"
 msgstr "إختر القاموس"
 
-#: addon\globalPlugins\DictionariesAlmaany\myDialog.py:87
+#. Translators: Label of OK button.
+#: addon\globalPlugins\DictionariesAlmaany\myDialog.py:113
 msgid "OK"
 msgstr "موافق"
 
-#: addon\globalPlugins\DictionariesAlmaany\myDialog.py:91
+#. Translators: Label of Cancel button.
+#: addon\globalPlugins\DictionariesAlmaany\myDialog.py:118
 msgid "cancel"
 msgstr "إلغاء"
 
-#: addon\globalPlugins\DictionariesAlmaany\myDialog.py:137
-msgid "Sorry, Service not available({})"
-msgstr "عُذرا, الخدمة غير متاحة({})"
+#. Translators: Message displayed if error happened.
+#: addon\globalPlugins\DictionariesAlmaany\myDialog.py:162
+msgid "No meaning found"
+msgstr "لم يتم إيجاد معنى"
+
+#. Translators: Message displayed if error happened.
+#: addon\globalPlugins\DictionariesAlmaany\myDialog.py:165
+msgid "Most likely no internet connection"
+msgstr "أغلب الظن أنه لا يوجد إتصال بالإنترنت"
+
+#: addon\globalPlugins\DictionariesAlmaany\myDialog.py:168
+msgid "Sorry, An Error Happened"
+msgstr "عُذراً, لقد حصلَ خَطَأ"
 
 #. Add-on description
 #. Translators: Long description to be shown for this add-on on add-on information from add-ons manager
@@ -84,10 +109,12 @@ msgstr "عُذرا, الخدمة غير متاحة({})"
 msgid ""
 "\tThis addon helps get the meaning of single words from www.almaany.com "
 "website.\n"
-"\tPress nvda+windows+d, dictionaries almaany dialog will be displayed, and you "
-"will be standing on an edit field.\n"
-"\tIf when pressing this command, you were standing on a selected word, the "
-"word will be put in the edit field.\n"
+"\tPress nvda+windows+d, dictionaries almaany dialog will be displayed, and "
+"you will be standing on an edit field.\n"
+"\tYou can change the default dictionary of the addon, from the addon's "
+"setting panel through preferences menu.\n"
+"\tIf when pressing this command, you were standing on a selected word, you "
+"will access the translation result directly.\n"
 "\tOtherwise, enter in the edit field the word you want, tab an choose the "
 "dictionary you want and press enter.\n"
 "\tThe meaning of the word will be displayed in a separate browseable message "
@@ -95,14 +122,13 @@ msgid ""
 msgstr ""
 "\tهذه الإضافة تساعدك على الحصول على معاني الكلمات, من خلال موقع www.almaany."
 "com.\n"
-"\tبالضغط على الإختصار nvda+windows+d, ستظهر لك محاورةْ قواميس المعاني, و ستكون "
-"واقفا على مربع تحرير.  \n"
-"\tو قَبلَ ضغط الإختصار, إذا كنت واقفا على كلمة محددة, هذه الكلمة ستظهر في مربع "
-"التحرير  \n"
-"\tأو اكتب في مربع التحرير الكلمة التي تريد, ثم إضغط تاب لتقف على قائمةْ "
-"القواميس إختر منها القاموس الذي تريد و اضغطْ عليه إنتر.  \n"
+"\tبالضغط على الإختصار nvda+windows+d, ستظهر لك محاورةْ قواميس المعاني, و "
+"ستكون واقفا على مربع تحرير.  \n"
+"\tو تستطيع دائما تغيير القاموس الإفتراضي, مِن شريط إعدادات الإضافة, و الذي "
+"تصل إليه مِن قائمةْ الإعدادات.\n"
+"\tو عند ضغط الإختصار, إذا كنتَ واقفا على كلمة محددة, ستحصل فورا على معنى "
+"الكلمة في القاموس الإفتراضي.\n"
+"\tأو عند فتح محاورةْ الإضافة, اكتب في مربع التحرير الكلمة التي تريد, ثم إضغط "
+"تاب لتقف على قائمةْ القواميس إختر منها القاموس الذي تريد و اضغطْ عليه إنتر.  \n"
 "\tو بعد ذاك, سيظهر معنى الكلمة في browseable message box أو نافذة تستطيع "
 "قراءتها و التنقل فيها كما في المتصفح.  "
-
-#~ msgid "Browser window(like firefox or chrome)"
-#~ msgstr "نافذةْ المتصفح)مثل Firefox أو Chrome("
