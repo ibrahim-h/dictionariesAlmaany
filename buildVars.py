@@ -19,12 +19,12 @@ addon_info = {
 	# Translators: Long description to be shown for this add-on on add-on information from add-ons manager
 	"addon_description" : _("""	This addon helps get the meaning of single words from www.almaany.com website.
 	Press nvda+windows+d, dictionaries almaany dialog will be displayed, and you will be standing on an edit field.
+	If when pressing this command, you were standing on a selected word, you will access the translation result directly using default dictionary.
 	You can change the default dictionary of the addon, from the addon's setting panel through preferences menu.
-	If when pressing this command, you were standing on a selected word, you will access the translation result directly.
 	Otherwise, enter in the edit field the word you want, tab an choose the dictionary you want and press enter.
 	The meaning of the word will be displayed in a separate browseable message box."""),
 	# version
-	"addon_version" : ,
+	"addon_version": "2.5",
 	# Author(s)
 	"addon_author" : u"Ibrahim Hamadeh<ibra.hamadeh@hotmail.com>",
 	# URL for the add-on documentation support
@@ -34,7 +34,7 @@ addon_info = {
 	# Minimum NVDA version supported (e.g. "2018.3")
 	"addon_minimumNVDAVersion" : "2019.3.0",
 	# Last NVDA version supported/tested (e.g. "2018.4", ideally more recent than minimum version)
-	"addon_lastTestedNVDAVersion" : "2021.1.0",
+	"addon_lastTestedNVDAVersion" : "2022.1.0",
 	# Add-on update channel (default is stable or None)
 	"addon_updateChannel" : None,
 }

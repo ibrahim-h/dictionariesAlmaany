@@ -49,12 +49,19 @@ class MyThread(threading.Thread):
 				content= re.findall(regex1, html)
 				if not content:
 					content= re.findall(regex2, html)
-					if not content:
-						content= re.findall(regex3, html)
+				if not content:
+					content= re.findall(regex3, html)
 				content= content[0]
+				#removing unWanted text from the page.
+				# regex of unWanted text in tables, third cell in the row.
+				toBeRemoved1= r'<td>[\s\S]*?<div class="dropdown text-right">[\s\S]*?<span[\s\S]+?</span>[\s\S]*?<ol class="dropdown-menu">[\s\S]*?<li>[\s\S]+?</li>[\s\S]*?<li>[\s\S]+?</li>[\s\S]*?<li>[\s\S]+?</li>[\s\S]*?</ol>[\s\S]*?</div>[\s\S]*?</td>'
+				#regex of unWanted text outside tables, in lists.
+				toBeRemoved2= r'<div class="dropdown text-right"[\s\S]+?<span[\s\S]+?</span>[\s\S]*?<ol class="dropdown-menu">[\s\S]*?<li>[\s\S]+?</li>[\s\S]*?<li>[\s\S]+?</li>[\s\S]*?<li>[\s\S]+?</li>[\s\S]*?</ol>[\s\S]*?</div>'
+				processedContent= re.sub(toBeRemoved1, "", content)
+				finalContent= re.sub(toBeRemoved2, "", processedContent)
 			except Exception as e:
 				log.info('', exc_info= True)
 				self.error= str(e)
 			else:
-				page= content +"<p> <a href=%s>"%(url) +"Look for the meaning on the web site</a></p>"
+				page= finalContent +"<p> <a href=%s>"%(url) +"Look for the meaning on the web site</a></p></body></html>"
 				self.meaning= page

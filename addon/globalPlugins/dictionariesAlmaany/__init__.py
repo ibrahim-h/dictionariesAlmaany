@@ -9,6 +9,7 @@ import api
 import textInfos
 import config
 import globalPluginHandler
+import globalVars
 from gui import guiHelper
 from scriptHandler import script
 from .myDialog import MyDialog
@@ -46,6 +47,12 @@ config.conf.spec["dictionariesAlmaany"]= configspec
 # Ensure one instance is running.
 INSTANCE= None
 
+def disableInSecureMode(decoratedCls):
+	if globalVars.appArgs.secure:
+		return globalPluginHandler.GlobalPlugin
+	return decoratedCls
+
+@disableInSecureMode
 class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 	# Translators: Category in input gestures dialog.
 	scriptCategory= _('Dictionaries Almaany')
