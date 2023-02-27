@@ -37,9 +37,11 @@ class MyThread(threading.Thread):
 		request= urllib.request.Request(url)
 		request.add_header('User-Agent', generate_user_agent())
 		try:
-			handle = urllib.request.urlopen(request)
-			html= handle.read().decode(handle.headers.get_content_charset())
-			handle.close()
+			response = urllib.request.urlopen(request)
+			# Some times the encoding of the page returns None, so in this case we use'utf-8' 
+			encoding = response.headers.get_content_charset() or 'utf-8'
+			html= response.read().decode(encoding)
+			response.close()
 			#log.info(html)
 		except Exception as e:
 			log.info('', exc_info= True)

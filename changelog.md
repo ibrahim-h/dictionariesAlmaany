@@ -1,3 +1,4 @@
-### Changes for 2.6 .
+## Changes for 2.6.1 .
 
-*	Update last tested version, to make the addon compatible with NVDA 2023.1.
+*	Fix a bug, for sometimes the encoding of the requested page is None  
+so in this case we consider the encoding to be 'utf-8'.
