@@ -1,4 +1,4 @@
-## Changes for 2.6.1 .
+## Changes for 2.6.2 .
 
-*	Fix a bug, for sometimes the encoding of the requested page is None  
-so in this case we consider the encoding to be 'utf-8'.
+*	Add auto update feature, that checks for new versions on startup.
+*	Add check box for auto update in setting panel, it is activated by default, and you can deactivate it.

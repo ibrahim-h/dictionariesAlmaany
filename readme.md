@@ -3,7 +3,7 @@
 *	Author: Ibrahim Hamadeh
 *	Contributors: Abdel
 *	NVDA compatibility: 2019.3 and later
-*	Download [version 2.6.1][1]  
+*	Download [version 2.6.2][1]  
 
 This addon helps you get the meaning of single words through the almaany.com website.  
 [almaany.com](https://www.almaany.com/en/dict/ar-en/).
@@ -33,6 +33,12 @@ choosing this, the result will be displayed in your default ordinary full browse
 please remember you can close this window only, with control+w or alt+f4.  
 	3.	the third, is the native NVDA message box, used it only after testing and if it suits you, for in our experience it smetimes make NVDA freezes.  
 *	After that you got a check box, to choose whether to close Dictionaries Almaany dialog after requesting the meaning of word or not.  
+*	Lastly you got a check box, to enable or disable the auto update of addon on start of NVDA.
+
+## Changes for 2.6.2 .
+
+*	Add auto update feature, that checks for new versions on startup.
+*	Add check box for auto update in setting panel, it is activated by default, and you can deactivate it.
 
 ## Changes for 2.6.1 .
 
@@ -86,4 +92,4 @@ fixing some bugs, getting the addon to return to work after it has stopped worki
 
 *	Thanks to Abdel contribution for porting the addon to python3, and using last nvda addon template.  
 
-[1]: https://github.com/ibrahim-h/dictionariesAlmaany/releases/download/2.6.1/DictionariesAlmaany-2.6.1.nvda-addon
+[1]: https://github.com/ibrahim-h/dictionariesAlmaany/releases/download/2.6.2/DictionariesAlmaany-2.6.2.nvda-addon

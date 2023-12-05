@@ -10,10 +10,12 @@ import textInfos
 import config
 import globalPluginHandler
 import globalVars
+import core
 from gui import guiHelper
 from scriptHandler import script
 from .myDialog import MyDialog
 from .myDialog import getListOfDictionaryNames, getUrlOfDictionary
+from .update import Initialize
 from logHandler import log
 
 import addonHandler
@@ -40,7 +42,8 @@ def isSelectedText():
 configspec={
 	"defaultDictionary": "integer(default=0)",
 	"windowType": "integer(default=0)",
-	"closeDialogAfterRequiringTranslation": "boolean(default= False)"
+	"closeDialogAfterRequiringTranslation": "boolean(default= False)",
+	"autoUpdate": "boolean(default= True)"
 }
 config.conf.spec["dictionariesAlmaany"]= configspec
 
@@ -61,6 +64,18 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 		super(GlobalPlugin, self).__init__(*args, **kwargs)
 
 		gui.settingsDialogs.NVDASettingsDialog.categoryClasses.append(DictionariesAlmaany)
+		# To allow check for update after NVDA started.
+		core.postNvdaStartup.register(self.checkForUpdate)
+
+	def checkForUpdate(self):
+		if not config.conf["dictionariesAlmaany"]["autoUpdate"]:
+			# Auto update is False
+			return
+		# starting the update process...
+		def checkWithDelay():
+			_beginChecking = Initialize()
+			_beginChecking.start()
+		wx.CallLater(7000, checkWithDelay)
 
 	def terminate(self):
 		gui.settingsDialogs.NVDASettingsDialog.categoryClasses.remove(DictionariesAlmaany)
@@ -95,7 +110,7 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 		self.showDictionariesAlmaanyDialog()
 
 #make  SettingsPanel  class
-class DictionariesAlmaany(gui.SettingsPanel):
+class DictionariesAlmaany(gui.settingsDialogs.SettingsPanel):
 	# Translators: title of the dialog
 	title= _("Dictionaries Almaany")
 
@@ -125,10 +140,16 @@ class DictionariesAlmaany(gui.SettingsPanel):
 
 		# Translators: label of the check box 
 		self.closeDialogCheckBox=wx.CheckBox(self,label=_("Close Dictionaries almaany Dialog after requesting translation"))
-		self.closeDialogCheckBox.SetValue(config.conf["dictionariesAlmaany"]["closeDialogAfterRequiringTranslation"])
 		settingsSizerHelper.addItem(self.closeDialogCheckBox)
+		self.closeDialogCheckBox.SetValue(config.conf["dictionariesAlmaany"]["closeDialogAfterRequiringTranslation"])
+
+		# Translators: label of the check box 
+		self.updateCheckBox=wx.CheckBox(self,label=_("Check for update on startup"))
+		settingsSizerHelper.addItem(self.updateCheckBox)
+		self.updateCheckBox.SetValue(config.conf["dictionariesAlmaany"]["autoUpdate"])
 
 	def onSave(self):
 		config.conf["dictionariesAlmaany"]["defaultDictionary"]= self.availableDictionariesComboBox.GetSelection()
 		config.conf["dictionariesAlmaany"]["windowType"]= self.resultWindowComboBox.GetSelection()
 		config.conf["dictionariesAlmaany"]["closeDialogAfterRequiringTranslation"]= self.closeDialogCheckBox.IsChecked() 
+		config.conf["dictionariesAlmaany"]["autoUpdate"]= self.updateCheckBox.IsChecked() 
