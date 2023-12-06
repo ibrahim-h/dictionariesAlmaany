@@ -103,8 +103,11 @@ class AddonFlow(Thread):
 		request = urllib.request.Request(urlRepos)
 		content = urllib.request.urlopen(request).read()
 		githubApi = json.loads(content.decode('utf-8'))
-		if githubApi[0]["tag_name"].strip('v') != myAddon.manifest["version"]:
-			newVersion= githubApi[0]["tag_name"].strip('v')
+		newVersion= githubApi[0]["tag_name"].strip('v')
+		currVersion= myAddon.manifest["version"]
+		#log.info(f'newVersion: {newVersion} and currVersion: {currVersion}')
+		# Compare versions as tuple of ints.
+		if tuple(int(s) for s in newVersion.split('.'))> tuple(int(s) for s in currVersion.split('.')):
 			downloadUrl = githubApi[0]['assets'][0]['browser_download_url']
 			addonDownloadedName = str(downloadUrl.split("/")[-1:]).replace("[", "").replace("\'", "").replace("]", "")
 
