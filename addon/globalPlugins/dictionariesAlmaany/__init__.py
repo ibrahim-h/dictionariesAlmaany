@@ -71,7 +71,7 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 		if not config.conf["dictionariesAlmaany"]["autoUpdate"]:
 			# Auto update is False
 			return
-		# starting the update process...
+		# starting the update process
 		def checkWithDelay():
 			_beginChecking = Initialize()
 			_beginChecking.start()

@@ -101,7 +101,11 @@ class AddonFlow(Thread):
 		if globalVars.appArgs.secure or config.isAppX or globalVars.appArgs.launcher:
 			AddonFlow.doNothing()
 		request = urllib.request.Request(urlRepos)
-		content = urllib.request.urlopen(request).read()
+		try:
+			content = urllib.request.urlopen(request).read()
+		except:
+			log.info(f'Error fetching {myAddon.manifest["summary"]} addon data during update feature, most likely due to absence of internet connection.')
+			return
 		githubApi = json.loads(content.decode('utf-8'))
 		newVersion= githubApi[0]["tag_name"].strip('v')
 		currVersion= myAddon.manifest["version"]
@@ -112,8 +116,8 @@ class AddonFlow(Thread):
 			addonDownloadedName = str(downloadUrl.split("/")[-1:]).replace("[", "").replace("\'", "").replace("]", "")
 
 			# Translators: Message dialog box to ask user if wants to update.
-			if gui.messageBox(_("It is available a new version {} of this add-on.\n Do you want to update?".format(newVersion)),
-			_("{}-Update".format(myAddon.manifest["summary"])),
+			if gui.messageBox(_("It is available a new version {} of this add-on.\n Do you want to update?").format(newVersion),
+			_("{}-Update").format(myAddon.manifest["summary"]),
 			style=wx.ICON_QUESTION|wx.YES_NO) == wx.YES:
 				download = Thread(target = AddonFlow.downloadAddon)
 				download.setDaemon(True)
@@ -149,7 +153,8 @@ class AddonFlow(Thread):
 		# It is not compatible, so do not install and inform user
 		else:
 			# Translators: Message dialog box to inform user that the add-on is not compatible
-			gui.messageBox(_("This new version of this add-on is not compatible with your version of NVDA.\n The update process will be terminated."), myAddon.manifest["summary"], style=wx.ICON_WARNING)
+			gui.messageBox(_("This new version of this add-on is not compatible with your version of NVDA.\n The update process will be terminated."),
+			myAddon.manifest["summary"], style=wx.ICON_WARNING)
 			AddonFlow.doNothing()
 
 	def install():
@@ -168,6 +173,7 @@ class AddonFlow(Thread):
 		if tempPath:
 			os.unlink(tempPath)
 		# to restart NVDA
+		from gui import addonGui
 		gui.addonGui.promptUserForRestart()
 
 	def doNothing():
