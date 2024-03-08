@@ -24,7 +24,7 @@ addon_info = {
 	Otherwise, enter in the edit field the word you want, tab an choose the dictionary you want and press enter.
 	The meaning of the word will be displayed in a separate browseable message box."""),
 	# version
-	"addon_version": "2.6.3",
+	"addon_version": "2.6.4",
 	# Author(s)
 	"addon_author" : u"Ibrahim Hamadeh<ibra.hamadeh@hotmail.com>",
 	# URL for the add-on documentation support
