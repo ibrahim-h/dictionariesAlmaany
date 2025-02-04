@@ -3,7 +3,7 @@
 *	Author: Ibrahim Hamadeh
 *	Contributors: Abdel
 *	NVDA compatibility: 2019.3 and later
-*	Download [version 2.6.5][1]  
+*	Download [version 2.6.6][1]  
 
 This addon helps you get the meaning of single words through the almaany.com website.  
 [almaany.com](https://www.almaany.com/en/dict/ar-en/).
@@ -105,4 +105,4 @@ fixing some bugs, getting the addon to return to work after it has stopped worki
 
 *	Thanks to Abdel contribution for porting the addon to python3, and using last nvda addon template.  
 
-[1]: https://github.com/ibrahim-h/dictionariesAlmaany/releases/download/2.6.5/DictionariesAlmaany-2.6.5.nvda-addon
+[1]: https://github.com/ibrahim-h/dictionariesAlmaany/releases/download/2.6.6/DictionariesAlmaany-2.6.6.nvda-addon

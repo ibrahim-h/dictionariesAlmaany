@@ -3,7 +3,7 @@
 *	تأليف: Ibrahim Hamadeh
 *	ساهمَ في الإضافة: Abdel
 *	التوافُق مع NVDA: 2019.3 فما فوق.
-*	تحميل [الإصدار 2.6.5][1]
+*	تحميل [الإصدار 2.6.6][1]
 
 هذه الإضافة تساعدك على الحصول على معاني الكلمات, من خلال موقع www.almaany.com.  
 [almaany.com](https://www.almaany.com/en/dict/ar-en/).
@@ -107,4 +107,4 @@
 
 *	الشكر الكبير للأخ العزيز عبد الكريم, لمساهمته بتطوير الإضافة للتوافق مع بايثون3, و استخدام أحدث نموذج لعمل الإضافات.  
 
-[1]: https://github.com/ibrahim-h/dictionariesAlmaany/releases/download/2.6.5/DictionariesAlmaany-2.6.5.nvda-addon
+[1]: https://github.com/ibrahim-h/dictionariesAlmaany/releases/download/2.6.6/DictionariesAlmaany-2.6.6.nvda-addon
