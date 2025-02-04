@@ -71,11 +71,14 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 		if not config.conf["dictionariesAlmaany"]["autoUpdate"]:
 			# Auto update is False
 			return
+		# Do not check for update in these conditions.
+		if globalVars.appArgs.secure or globalVars.appArgs.launcher or isModalMessageBoxActive():
+			return
 		# starting the update process
 		def checkWithDelay():
 			_beginChecking = Initialize()
 			_beginChecking.start()
-		wx.CallLater(7000, checkWithDelay)
+		wx.CallLater(9000, checkWithDelay)
 
 	def terminate(self):
 		gui.settingsDialogs.NVDASettingsDialog.categoryClasses.remove(DictionariesAlmaany)

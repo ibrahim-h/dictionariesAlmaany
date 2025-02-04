@@ -63,7 +63,7 @@ dictionaries_nameAndUrl= [
 	(u'قاموس عربي ⇔ برتغالي', 'https://www.almaany.com/ar/dict/ar-pt/'),
 	(u'قاموس عربي ⇔ اندونيسي', 'https://www.almaany.com/ar/dict/ar-id/'),
 	(u'قاموس عربي ⇐ اردو', 'https://www.almaany.com/ar/dict/ar-ur/'),
-	(u'مَعاني الأسماء', 'http://www.almaany.com/ar/name/')
+	(u'مَعاني الأسماء', 'https://www.almaany.com/ar/name/')
 ]
 
 def getListOfDictionaryNames():

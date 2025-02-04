@@ -16,9 +16,10 @@ del sys.path[-1]
 import addonHandler
 addonHandler.initTranslation()
 
-regex1= '(<h1 class="section">[\s\S]+<h1 class="section">[\s\S]+?)<h[23456]'
-regex2= '(<h1 class="section">[\s\S]+?)<h[23456]'
-regex3= '(<h1>[\s\S]+?<h2>[\s\S]+?</h2>[\s\S]+?)<h[23456]'
+regex1= '(<h1 class="section">[\s\S]+<h1[\s\S]*?>[\s\S]+?)<h[23456]'
+regex2= '(<h1[\s\S]*?>[\s\S]+?<h2[\s\S]*?>[\s\S]+?</h2>[\s\S]+?)<h[23456]'
+#regex2= '(<h1 class="section">[\s\S]+?)<h[23456]'
+regex3= '(<div class="panel-heading"><h2>[\s\S]+?)<h[23456]'
 
 class MyThread(threading.Thread):
 	def __init__(self, text, base_url):
