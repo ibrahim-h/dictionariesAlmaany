@@ -13,6 +13,7 @@ import globalVars
 import core
 from gui import guiHelper
 from scriptHandler import script
+from gui.message import isModalMessageBoxActive
 from .myDialog import MyDialog
 from .myDialog import getListOfDictionaryNames, getUrlOfDictionary
 from .update import Initialize
