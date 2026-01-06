@@ -46,18 +46,18 @@ msgstr "Varsayılan sözlüğü seçin:"
 
 #. Translators: Type of windows to display translation result.
 #: addon\globalPlugins\DictionariesAlmaany\__init__.py:129
+msgid "NVDA browseable message (Recommended)"
+msgstr "NVDA göz atılabilir mesaj kutusu (Önerilen)"
+
+#. Translators: Type of windows to display translation result.
+#: addon\globalPlugins\DictionariesAlmaany\__init__.py:131
 msgid "Default full browser"
 msgstr "Varsayılan tam tarayıcı"
 
 #. Translators: Type of windows to display translation result.
-#: addon\globalPlugins\DictionariesAlmaany\__init__.py:131
+#: addon\globalPlugins\DictionariesAlmaany\__init__.py:133
 msgid "Browser window only"
 msgstr "Yalnızca tarayıcı penceresi"
-
-#. Translators: Type of windows to display translation result.
-#: addon\globalPlugins\DictionariesAlmaany\__init__.py:133
-msgid "NVDA browseable message box(choose it after testing)"
-msgstr "NVDA göz atılabilir mesaj kutusu(test ettikten sonra seçin)"
 
 #. Translators: label of cumbo box to choose type of window to display result.
 #: addon\globalPlugins\DictionariesAlmaany\__init__.py:137

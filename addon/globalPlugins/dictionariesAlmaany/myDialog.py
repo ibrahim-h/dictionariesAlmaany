@@ -148,11 +148,16 @@ class MyDialog(wx.Dialog):
 			time.sleep(0.5)
 		t.join()
 
-		title= u'المَعَاني message box'
-		useDefaultFullBrowser= config.conf["dictionariesAlmaany"]["windowType"]== 0
-		useBrowserWindowOnly= config.conf["dictionariesAlmaany"]["windowType"]== 1
-		useNvdaMessageBox= config.conf["dictionariesAlmaany"]["windowType"]== 2
-		if t.meaning and useDefaultFullBrowser:
+		title= _('Dictionaries Almaany')
+		# Window type options: 0=NVDA message, 1=Default browser, 2=Browser window only
+		useNvdaMessageBox= config.conf["dictionariesAlmaany"]["windowType"]== 0
+		useDefaultFullBrowser= config.conf["dictionariesAlmaany"]["windowType"]== 1
+		useBrowserWindowOnly= config.conf["dictionariesAlmaany"]["windowType"]== 2
+		
+		if t.meaning and useNvdaMessageBox:
+			queueHandler.queueFunction(queueHandler.eventQueue, ui.browseableMessage, t.meaning, title=title, isHtml=True)
+			return
+		elif t.meaning and useDefaultFullBrowser:
 			openBrowserWindow('default', t.meaning, directive= '', default= True)
 		elif t.meaning and useBrowserWindowOnly:
 			if 'Firefox' in browsers and not appIsRunning('firefox.exe'):
@@ -161,9 +166,6 @@ class MyDialog(wx.Dialog):
 				openBrowserWindow('Google Chrome', t.meaning, directive= ' -kiosk ')
 			elif 'Internet Explorer' in browsers:
 				openBrowserWindow('Internet Explorer', t.meaning, directive= ' -k -private ')
-		elif t.meaning and useNvdaMessageBox:
-			queueHandler.queueFunction(queueHandler.eventQueue, ui.browseableMessage, t.meaning, title=title, isHtml=True)
-			return
 		elif t.error:
 			if t.error== "HTTP Error 410: Gone":
 				# Translators: Message displayed if error happened.

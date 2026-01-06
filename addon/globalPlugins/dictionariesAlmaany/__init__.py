@@ -41,6 +41,7 @@ def isSelectedText():
 #default configuration 
 configspec={
 	"defaultDictionary": "integer(default=0)",
+	# 0=NVDA message box (recommended), 1=Default browser, 2=Browser window only
 	"windowType": "integer(default=0)",
 	"closeDialogAfterRequiringTranslation": "boolean(default= False)",
 	"autoUpdate": "boolean(default= True)"
@@ -143,11 +144,11 @@ class DictionariesAlmaany(gui.settingsDialogs.SettingsPanel):
 
 		windowTypes= [
 		# Translators: Type of windows to display translation result.
+		_("NVDA browseable message (Recommended)"), 
+		# Translators: Type of windows to display translation result.
 		_("Default full browser"), 
 		# Translators: Type of windows to display translation result.
-		_("Browser window only"), 
-		# Translators: Type of windows to display translation result.
-		_("NVDA browseable message box(choose it after testing)")
+		_("Browser window only")
 		]
 		self.resultWindowComboBox= settingsSizerHelper.addLabeledControl(
 		# Translators: label of cumbo box to choose type of window to display result.

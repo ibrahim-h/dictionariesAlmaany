@@ -43,17 +43,17 @@ msgstr ""
 
 #. Translators: Type of windows to display translation result.
 #: addon\globalPlugins\DictionariesAlmaany\__init__.py:129
-msgid "Default full browser"
+msgid "NVDA browseable message (Recommended)"
 msgstr ""
 
 #. Translators: Type of windows to display translation result.
 #: addon\globalPlugins\DictionariesAlmaany\__init__.py:131
-msgid "Browser window only"
+msgid "Default full browser"
 msgstr ""
 
 #. Translators: Type of windows to display translation result.
 #: addon\globalPlugins\DictionariesAlmaany\__init__.py:133
-msgid "NVDA browseable message box(choose it after testing)"
+msgid "Browser window only"
 msgstr ""
 
 #. Translators: label of cumbo box to choose type of window to display result.
