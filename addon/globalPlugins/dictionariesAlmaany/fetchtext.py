@@ -12,7 +12,7 @@ from logHandler import log
 # Add current path for user_agent module
 currentPath = os.path.abspath(os.path.dirname(__file__))
 if currentPath not in sys.path:
-	sys.path.insert(0, currentPath)
+	sys.path.append(currentPath)
 try:
 	from user_agent import generate_user_agent
 finally:
@@ -72,5 +72,7 @@ class MyThread(threading.Thread):
 				log.info('', exc_info= True)
 				self.error= str(e)
 			else:
-				page= finalContent +"<p> <a href=%s>"%(url) +"Look for the meaning on the web site</a></p></body></html>"
+				# Add source link - works in browser, shows as text in NVDA message
+				sourceLink = "<p><a href=\"%s\">%s</a></p>" % (url, _("View on almaany.com"))
+				page= finalContent + sourceLink
 				self.meaning= page

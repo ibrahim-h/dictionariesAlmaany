@@ -36,14 +36,14 @@ msgid ""
 "meaning ."
 msgstr ""
 
-#. Translators: label of cumbo box to choose default dictionary.
+#. Translators: label of combo box to choose default dictionary.
 #: addon\globalPlugins\DictionariesAlmaany\__init__.py:122
 msgid "Choose default dictionary:"
 msgstr ""
 
 #. Translators: Type of windows to display translation result.
 #: addon\globalPlugins\DictionariesAlmaany\__init__.py:129
-msgid "NVDA browseable message (Recommended)"
+msgid "NVDA browsable message (Recommended)"
 msgstr ""
 
 #. Translators: Type of windows to display translation result.
@@ -56,7 +56,7 @@ msgstr ""
 msgid "Browser window only"
 msgstr ""
 
-#. Translators: label of cumbo box to choose type of window to display result.
+#. Translators: label of combo box to choose type of window to display result.
 #: addon\globalPlugins\DictionariesAlmaany\__init__.py:137
 msgid "Choose type of window To Display Result:"
 msgstr ""

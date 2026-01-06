@@ -197,13 +197,15 @@ class MyDialog(wx.Dialog):
 			if closeDialogAfterRequiringTranslation:
 				wx.CallLater(4000, self._safeDestroy)
 
-	def _safeDestroy(self):
-		"""Safely destroy the dialog and clean up."""
+	def Destroy(self):
+		"""Override Destroy to ensure the close callback is always invoked."""
 		if _onCloseCallback:
 			_onCloseCallback()
+		super(MyDialog, self).Destroy()
+
+	def _safeDestroy(self):
+		"""Safely destroy the dialog."""
 		self.Destroy()
 
 	def onCancel (self, e):
-		if _onCloseCallback:
-			_onCloseCallback()
 		self.Destroy()

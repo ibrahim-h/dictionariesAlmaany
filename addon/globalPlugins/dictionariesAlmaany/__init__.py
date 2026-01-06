@@ -89,7 +89,8 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 			try:
 				INSTANCE.Destroy()
 			except Exception:
-				pass
+				# Log and ignore errors during dialog destruction to avoid breaking NVDA shutdown.
+				log.error("Error while destroying DictionariesAlmaany dialog instance", exc_info=True)
 			INSTANCE = None
 
 	def _onDialogClose(self):
@@ -136,7 +137,7 @@ class DictionariesAlmaany(gui.settingsDialogs.SettingsPanel):
 		settingsSizerHelper = guiHelper.BoxSizerHelper(self, sizer=sizer)
 
 		self.availableDictionariesComboBox= settingsSizerHelper.addLabeledControl(
-		# Translators: label of cumbo box to choose default dictionary.
+		# Translators: label of combo box to choose default dictionary.
 		_("Choose default dictionary:"), 
 		wx.Choice, choices= getListOfDictionaryNames()
 		)
@@ -144,14 +145,14 @@ class DictionariesAlmaany(gui.settingsDialogs.SettingsPanel):
 
 		windowTypes= [
 		# Translators: Type of windows to display translation result.
-		_("NVDA browseable message (Recommended)"), 
+		_("NVDA browsable message (Recommended)"), 
 		# Translators: Type of windows to display translation result.
 		_("Default full browser"), 
 		# Translators: Type of windows to display translation result.
 		_("Browser window only")
 		]
 		self.resultWindowComboBox= settingsSizerHelper.addLabeledControl(
-		# Translators: label of cumbo box to choose type of window to display result.
+		# Translators: label of combo box to choose type of window to display result.
 		_("Choose type of window To Display Result:"), 
 		wx.Choice, choices= windowTypes)
 		self.resultWindowComboBox.SetSelection(config.conf["dictionariesAlmaany"]["windowType"])
