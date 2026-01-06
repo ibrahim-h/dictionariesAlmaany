@@ -14,7 +14,7 @@ import core
 from gui import guiHelper
 from scriptHandler import script
 from gui.message import isModalMessageBoxActive
-from .myDialog import MyDialog
+from .myDialog import MyDialog, setOnCloseCallback
 from .myDialog import getListOfDictionaryNames, getUrlOfDictionary
 from .update import Initialize
 from logHandler import log
@@ -31,8 +31,7 @@ def isSelectedText():
 		obj=treeInterceptor
 	try:
 		info=obj.makeTextInfo(textInfos.POSITION_SELECTION)
-	#except (RuntimeError, NotImplementedError):
-	except:
+	except (RuntimeError, NotImplementedError):
 		info=None
 	if not info or info.isCollapsed:
 		return False
@@ -83,10 +82,24 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 
 	def terminate(self):
 		gui.settingsDialogs.NVDASettingsDialog.categoryClasses.remove(DictionariesAlmaany)
+		core.postNvdaStartup.unregister(self.checkForUpdate)
+		global INSTANCE
+		if INSTANCE:
+			try:
+				INSTANCE.Destroy()
+			except Exception:
+				pass
+			INSTANCE = None
+
+	def _onDialogClose(self):
+		"""Callback when dialog is closed."""
+		global INSTANCE
+		INSTANCE = None
 
 	def showDictionariesAlmaanyDialog(self):
 		global INSTANCE
 		if not INSTANCE:
+			setOnCloseCallback(self._onDialogClose)
 			d= MyDialog(gui.mainFrame)
 #			log.info('after creating object')
 			d.postInit()

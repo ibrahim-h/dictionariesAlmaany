@@ -120,7 +120,7 @@ class AddonFlow(Thread):
 			_("{}-Update").format(myAddon.manifest["summary"]),
 			style=wx.ICON_QUESTION|wx.YES_NO) == wx.YES:
 				download = Thread(target = AddonFlow.downloadAddon)
-				download.setDaemon(True)
+				download.daemon = True
 				try:
 					download.start()
 					#log.info("download started ...")

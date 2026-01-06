@@ -4,14 +4,20 @@
 
 import urllib
 import re
-import os, sys
+import os
+import sys
 import threading
 from logHandler import log
 
-currentPath= os.path.abspath(os.path.dirname(__file__))
-sys.path.append(currentPath)
-from user_agent import generate_user_agent
-del sys.path[-1]
+# Add current path for user_agent module
+currentPath = os.path.abspath(os.path.dirname(__file__))
+if currentPath not in sys.path:
+	sys.path.insert(0, currentPath)
+try:
+	from user_agent import generate_user_agent
+finally:
+	if currentPath in sys.path:
+		sys.path.remove(currentPath)
 
 import addonHandler
 addonHandler.initTranslation()

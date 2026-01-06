@@ -81,6 +81,14 @@ def getUrlOfDictionary(i=0, default= False):
 	dict_url= dictionaries_nameAndUrl[i][1]
 	return dict_url
 
+# Callback to clean up INSTANCE when dialog closes
+_onCloseCallback = None
+
+def setOnCloseCallback(callback):
+	"""Set callback to be called when dialog closes."""
+	global _onCloseCallback
+	_onCloseCallback = callback
+
 class MyDialog(wx.Dialog):
 	''' Dictionaries Almaany dialog, contains an edit field to enter a word, and a combo box to choose dictionary.
 	It pops up only if no selection found.
@@ -185,7 +193,15 @@ class MyDialog(wx.Dialog):
 			self.getMeaning(word, dict_url)
 			closeDialogAfterRequiringTranslation= config.conf["dictionariesAlmaany"]["closeDialogAfterRequiringTranslation"]
 			if closeDialogAfterRequiringTranslation:
-				wx.CallLater(4000, self.Destroy)
+				wx.CallLater(4000, self._safeDestroy)
+
+	def _safeDestroy(self):
+		"""Safely destroy the dialog and clean up."""
+		if _onCloseCallback:
+			_onCloseCallback()
+		self.Destroy()
 
 	def onCancel (self, e):
+		if _onCloseCallback:
+			_onCloseCallback()
 		self.Destroy()
