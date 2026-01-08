@@ -4,14 +4,20 @@
 
 import urllib
 import re
-import os, sys
+import os
+import sys
 import threading
 from logHandler import log
 
-currentPath= os.path.abspath(os.path.dirname(__file__))
-sys.path.append(currentPath)
-from user_agent import generate_user_agent
-del sys.path[-1]
+# Add current path for user_agent module
+currentPath = os.path.abspath(os.path.dirname(__file__))
+if currentPath not in sys.path:
+	sys.path.append(currentPath)
+try:
+	from user_agent import generate_user_agent
+finally:
+	if currentPath in sys.path:
+		sys.path.remove(currentPath)
 
 import addonHandler
 addonHandler.initTranslation()
@@ -66,5 +72,7 @@ class MyThread(threading.Thread):
 				log.info('', exc_info= True)
 				self.error= str(e)
 			else:
-				page= finalContent +"<p> <a href=%s>"%(url) +"Look for the meaning on the web site</a></p></body></html>"
+				# Add source link - works in browser, shows as text in NVDA message
+				sourceLink = "<p><a href=\"%s\">%s</a></p>" % (url, _("View on almaany.com"))
+				page= finalContent + sourceLink
 				self.meaning= page

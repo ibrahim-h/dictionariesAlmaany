@@ -14,7 +14,7 @@ import core
 from gui import guiHelper
 from scriptHandler import script
 from gui.message import isModalMessageBoxActive
-from .myDialog import MyDialog
+from .myDialog import MyDialog, setOnCloseCallback
 from .myDialog import getListOfDictionaryNames, getUrlOfDictionary
 from .update import Initialize
 from logHandler import log
@@ -31,8 +31,7 @@ def isSelectedText():
 		obj=treeInterceptor
 	try:
 		info=obj.makeTextInfo(textInfos.POSITION_SELECTION)
-	#except (RuntimeError, NotImplementedError):
-	except:
+	except (RuntimeError, NotImplementedError):
 		info=None
 	if not info or info.isCollapsed:
 		return False
@@ -42,6 +41,7 @@ def isSelectedText():
 #default configuration 
 configspec={
 	"defaultDictionary": "integer(default=0)",
+	# 0=NVDA message box (recommended), 1=Default browser, 2=Browser window only
 	"windowType": "integer(default=0)",
 	"closeDialogAfterRequiringTranslation": "boolean(default= False)",
 	"autoUpdate": "boolean(default= True)"
@@ -83,10 +83,25 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 
 	def terminate(self):
 		gui.settingsDialogs.NVDASettingsDialog.categoryClasses.remove(DictionariesAlmaany)
+		core.postNvdaStartup.unregister(self.checkForUpdate)
+		global INSTANCE
+		if INSTANCE:
+			try:
+				INSTANCE.Destroy()
+			except Exception:
+				# Log and ignore errors during dialog destruction to avoid breaking NVDA shutdown.
+				log.error("Error while destroying DictionariesAlmaany dialog instance", exc_info=True)
+			INSTANCE = None
+
+	def _onDialogClose(self):
+		"""Callback when dialog is closed."""
+		global INSTANCE
+		INSTANCE = None
 
 	def showDictionariesAlmaanyDialog(self):
 		global INSTANCE
 		if not INSTANCE:
+			setOnCloseCallback(self._onDialogClose)
 			d= MyDialog(gui.mainFrame)
 #			log.info('after creating object')
 			d.postInit()
@@ -122,7 +137,7 @@ class DictionariesAlmaany(gui.settingsDialogs.SettingsPanel):
 		settingsSizerHelper = guiHelper.BoxSizerHelper(self, sizer=sizer)
 
 		self.availableDictionariesComboBox= settingsSizerHelper.addLabeledControl(
-		# Translators: label of cumbo box to choose default dictionary.
+		# Translators: label of combo box to choose default dictionary.
 		_("Choose default dictionary:"), 
 		wx.Choice, choices= getListOfDictionaryNames()
 		)
@@ -130,14 +145,14 @@ class DictionariesAlmaany(gui.settingsDialogs.SettingsPanel):
 
 		windowTypes= [
 		# Translators: Type of windows to display translation result.
+		_("NVDA browsable message (Recommended)"), 
+		# Translators: Type of windows to display translation result.
 		_("Default full browser"), 
 		# Translators: Type of windows to display translation result.
-		_("Browser window only"), 
-		# Translators: Type of windows to display translation result.
-		_("NVDA browseable message box(choose it after testing)")
+		_("Browser window only")
 		]
 		self.resultWindowComboBox= settingsSizerHelper.addLabeledControl(
-		# Translators: label of cumbo box to choose type of window to display result.
+		# Translators: label of combo box to choose type of window to display result.
 		_("Choose type of window To Display Result:"), 
 		wx.Choice, choices= windowTypes)
 		self.resultWindowComboBox.SetSelection(config.conf["dictionariesAlmaany"]["windowType"])

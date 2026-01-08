@@ -40,27 +40,27 @@ msgstr ""
 "الحصول على معنى الكلمة المُحددة بواسطةْ قواميس المَعاني,و إذا لم يكن هناك "
 "تحديد, يتم فتح محاورةْ قواميس المَعاني لإدخال كلمة و إيجاد معناها."
 
-#. Translators: label of cumbo box to choose default dictionary.
+#. Translators: label of combo box to choose default dictionary.
 #: addon\globalPlugins\DictionariesAlmaany\__init__.py:122
 msgid "Choose default dictionary:"
 msgstr "اخترْ القاموس الإفتراضي:"
 
 #. Translators: Type of windows to display translation result.
 #: addon\globalPlugins\DictionariesAlmaany\__init__.py:129
+msgid "NVDA browsable message (Recommended)"
+msgstr "نافذة NVDA للتصفح (مُوصى بها)"
+
+#. Translators: Type of windows to display translation result.
+#: addon\globalPlugins\DictionariesAlmaany\__init__.py:131
 msgid "Default full browser"
 msgstr "المتصفح الإفتراضي العادي"
 
 #. Translators: Type of windows to display translation result.
-#: addon\globalPlugins\DictionariesAlmaany\__init__.py:131
+#: addon\globalPlugins\DictionariesAlmaany\__init__.py:133
 msgid "Browser window only"
 msgstr "نافذةْ المتصفح فقط"
 
-#. Translators: Type of windows to display translation result.
-#: addon\globalPlugins\DictionariesAlmaany\__init__.py:133
-msgid "NVDA browseable message box(choose it after testing)"
-msgstr "نافذةْ NVDA الخاصة بالتصفح(مِن الأفضل تجربتها قبل الإختيار)"
-
-#. Translators: label of cumbo box to choose type of window to display result.
+#. Translators: label of combo box to choose type of window to display result.
 #: addon\globalPlugins\DictionariesAlmaany\__init__.py:137
 msgid "Choose type of window To Display Result:"
 msgstr "اختيار نافذةْ النتائج:"
