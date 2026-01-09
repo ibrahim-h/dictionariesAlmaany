@@ -14,7 +14,7 @@ import core
 from gui import guiHelper
 from scriptHandler import script
 from gui.message import isModalMessageBoxActive
-from .myDialog import MyDialog, setOnCloseCallback
+from .myDialog import MyDialog
 from .myDialog import getListOfDictionaryNames, getUrlOfDictionary
 from .update import Initialize
 from logHandler import log
@@ -93,15 +93,9 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 				log.error("Error while destroying DictionariesAlmaany dialog instance", exc_info=True)
 			INSTANCE = None
 
-	def _onDialogClose(self):
-		"""Callback when dialog is closed."""
-		global INSTANCE
-		INSTANCE = None
-
 	def showDictionariesAlmaanyDialog(self):
 		global INSTANCE
 		if not INSTANCE:
-			setOnCloseCallback(self._onDialogClose)
 			d= MyDialog(gui.mainFrame)
 #			log.info('after creating object')
 			d.postInit()

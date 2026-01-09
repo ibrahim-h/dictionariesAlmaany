@@ -6,10 +6,8 @@
 import wx
 import queueHandler
 import config
-#import sys
 import webbrowser
 from .fetchtext import MyThread
-#from .fetchtext import isSelectedText
 from .getbrowsers import getBrowsers
 from tones import beep
 import time
@@ -80,14 +78,6 @@ def getUrlOfDictionary(i=0, default= False):
 	# The url is the second item in the tuple.
 	dict_url= dictionaries_nameAndUrl[i][1]
 	return dict_url
-
-# Callback to clean up INSTANCE when dialog closes
-_onCloseCallback = None
-
-def setOnCloseCallback(callback):
-	"""Set callback to be called when dialog closes."""
-	global _onCloseCallback
-	_onCloseCallback = callback
 
 class MyDialog(wx.Dialog):
 	''' Dictionaries Almaany dialog, contains an edit field to enter a word, and a combo box to choose dictionary.
@@ -195,17 +185,7 @@ class MyDialog(wx.Dialog):
 			self.getMeaning(word, dict_url)
 			closeDialogAfterRequiringTranslation= config.conf["dictionariesAlmaany"]["closeDialogAfterRequiringTranslation"]
 			if closeDialogAfterRequiringTranslation:
-				wx.CallLater(4000, self._safeDestroy)
-
-	def Destroy(self):
-		"""Override Destroy to ensure the close callback is always invoked."""
-		if _onCloseCallback:
-			_onCloseCallback()
-		super(MyDialog, self).Destroy()
-
-	def _safeDestroy(self):
-		"""Safely destroy the dialog."""
-		self.Destroy()
+				wx.CallLater(4000, self.Destroy)
 
 	def onCancel (self, e):
 		self.Destroy()
