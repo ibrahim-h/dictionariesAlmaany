@@ -1,4 +1,5 @@
-from user_agent.base import * # noqa: F403 pylint: disable=wildcard-import
-from user_agent.error import * # noqa: F403 pylint: disable=wildcard-import
+from .base import generate_navigator, generate_navigator_js, generate_user_agent
+from .error import *  # noqa: F403 pylint: disable=wildcard-import
 
-__version__ = '0.1.10'
+__version__ = "0.1.14"  # type: str
+__all__ = ["generate_navigator", "generate_navigator_js", "generate_user_agent"]

@@ -1,15 +1,12 @@
-__all__ = ('UserAgentError', 'InvalidOption')
+__all__ = ["InvalidOption", "InvalidOptionError", "UserAgentError"]
 
 
 class UserAgentError(Exception):
-    """
-    Base class for all errors
-    raising from the user_agent library
-    """
+    """Base class for all errors raising from the user_agent library."""
 
 
-class InvalidOption(Exception):
-    """
-    Raises when user call user_agent library methods
-    with incorrect arguments.
-    """
+class InvalidOptionError(UserAgentError):
+    """Raises when user_agent library methods are called with incorrect arguments."""
+
+
+InvalidOption = InvalidOptionError  # for backward compatibility
