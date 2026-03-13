@@ -1,3 +1,4 @@
-## Changes for 2.6.7 .
+## Changes for 2.6.8 .
 
-*	Enhance a lot of code in the addon. The user will notice that the default type of window to display translation, is now the NVDA browseable message box, credit goes to the PR by [hmdqr](https://github.com/hmdqr) , so many thanks to him.
+*	update user_agent package, to get it work with NVDA 2026.1.
+*	update last tested version to 2026.1 to comply with newer versions of NVDA.
